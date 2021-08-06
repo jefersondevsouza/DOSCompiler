@@ -428,6 +428,7 @@ namespace DOSCompiler
                 Console.WriteLine(InicioFrase + "Você pode *CONTINUAR com a compilação e ao *FINAL essa solução será compilada novamente");
                 Console.WriteLine(InicioFrase + "Você pode *ESCOLHER outra solução para compilar e em seguida essa solution será compilada novamente");
                 Console.WriteLine(InicioFrase + "Você pode *REPETIR a compilação desta solução e continar, se tiver mais soluções.");
+                Console.WriteLine(InicioFrase + "Você pode *ABRIR a solução e fazer alguma correção no código e voltar nessa parte.");
                 Console.WriteLine(InicioFrase);
                 Console.Write(InicioFrase + "Digite a letra posterior ao * para definir sua escolha: ");
                 string continuar = Console.ReadLine();
@@ -452,6 +453,15 @@ namespace DOSCompiler
                 else if (continuar.ToUpper().Equals("R"))
                 {
                     s.RecompilarAgora = true;
+                }
+                else if (continuar.ToUpper().Equals("A"))
+                {
+                    Process.Start(s.LocalDisco);
+                    Console.WriteLine(InicioFrase + "Abrindo solution...");
+                    Console.WriteLine(InicioFrase + s.LocalDisco);
+                    Console.WriteLine(InicioFrase + "Voltando para as opções...");
+                    AnalisarCompilacao(s);
+
                 }
                 else
                 {
