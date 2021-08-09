@@ -1,7 +1,0 @@
-C:\D\GitProjects\DOSCompiler\DOSCompiler\DOSCompiler\bin\Debug\builder.exe.config
-C:\D\GitProjects\DOSCompiler\DOSCompiler\DOSCompiler\bin\Debug\builder.exe
-C:\D\GitProjects\DOSCompiler\DOSCompiler\DOSCompiler\bin\Debug\builder.pdb
-C:\D\GitProjects\DOSCompiler\DOSCompiler\DOSCompiler\obj\Debug\DOSCompiler.csproj.AssemblyReference.cache
-C:\D\GitProjects\DOSCompiler\DOSCompiler\DOSCompiler\obj\Debug\DOSCompiler.csproj.CoreCompileInputs.cache
-C:\D\GitProjects\DOSCompiler\DOSCompiler\DOSCompiler\obj\Debug\builder.exe
-C:\D\GitProjects\DOSCompiler\DOSCompiler\DOSCompiler\obj\Debug\builder.pdb

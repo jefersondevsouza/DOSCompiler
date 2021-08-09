@@ -57,6 +57,8 @@ namespace DOSCompiler
 
         static void Main(string[] args)
         {
+            LerArquivo();
+
             Console.WriteLine(InicioFrase);
             Console.WriteLine("**************************************Project Compiler by Jefers********************************************");
             Console.WriteLine(InicioFrase);
@@ -67,7 +69,6 @@ namespace DOSCompiler
             Console.Write(InicioFrase + "Deseja compilar o trunk? S ou N: ");
             string resposta = Console.ReadLine();
 
-            LerArquivo();//
             if (resposta.ToUpper().Equals("S"))
             {
                 trunk = true;
@@ -88,7 +89,7 @@ namespace DOSCompiler
                 versaoTeam = string.Format(branchTeam, versao);
             }
 
-            //LerArquivo();
+            AtualizarCaminhos();
             PrepararCompilar();
 
             Console.WriteLine(InicioFrase);
@@ -135,8 +136,8 @@ namespace DOSCompiler
                         if (array.Length > 0)
                         {
                             p.Codigo = cod.ToString();
-                            p.LocalDisco = string.Format(array[0], versaoDisco);
-                            p.LocalTeamFoundation = string.Format(array[1], versaoTeam);
+                            p.LocalDisco = array[0];
+                            p.LocalTeamFoundation = array[1];
 
                         }
 
@@ -149,6 +150,15 @@ namespace DOSCompiler
                     }
 
                 }
+            }
+        }
+
+        private static void AtualizarCaminhos()
+        {
+            foreach (var p in parametros.Values )
+            {
+                p.LocalDisco = string.Format(p.LocalDisco, versaoDisco);
+                p.LocalTeamFoundation = string.Format(p.LocalTeamFoundation, versaoTeam);
             }
         }
 
@@ -482,7 +492,8 @@ namespace DOSCompiler
 
                 string conf = string.Format(@"{0}", solution.LocalDisco);
                 //var processo = Process.Start(@"C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe ", conf + @" /fl1 /fl2 /fl3 /flp2:logfile=JustErrors.log;errorsonly /flp3:logfile=JustWarnings.log;warningsonly");
-                var processo = Process.Start(MSBuildLocation + " ", conf + @" /fl1 /fl2 /fl3 /flp2:logfile=JustErrors.log;errorsonly /flp3:logfile=JustWarnings.log;warningsonly");
+                string comando = conf + @" /fl1 /fl2 /fl3 /flp2:logfile=JustErrors.log;errorsonly /flp3:logfile=JustWarnings.log;warningsonly";
+                var processo = Process.Start(MSBuildLocation + " ", comando);
 
                 Console.WriteLine(InicioFrase);
                 Console.WriteLine(InicioFrase + string.Format("Build nº {0} - Projeto {1}", solution.NBuild, solution.Projeto));
@@ -574,7 +585,8 @@ namespace DOSCompiler
                 Console.WriteLine(InicioFrase + "Aguarde...");
 
                 //var processo = Process.Start(@"C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\TF.exe", string.Format(@"get {0}", solution.LocalTeamFoundation) + @"  /force /recursive");
-                var processo = Process.Start(MSTFLocation, string.Format(@"get {0}", solution.LocalTeamFoundation) + @"  /force /recursive");
+                string comando = string.Format(@"get {0}", solution.LocalTeamFoundation) + @"  /force /recursive";
+                var processo = Process.Start(MSTFLocation, comando);
 
 
                 processo.WaitForExit();
